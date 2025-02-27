@@ -1,9 +1,8 @@
-package com.hospital.management.service;
+package com.hmanagement.hospital.management.service;
 
-import com.hospital.management.dto.PatientDTO;
-import com.hospital.management.entity.Gender;
-import com.hospital.management.entity.Patient;
-import com.hospital.management.repository.PatientRepository;
+import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.entity.Patient;
+import com.hmanagement.hospital.management.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

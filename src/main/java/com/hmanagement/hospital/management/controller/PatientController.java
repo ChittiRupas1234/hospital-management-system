@@ -1,10 +1,9 @@
-package com.hospital.management.control;
+package com.hmanagement.hospital.management.controller;
 
 
-import com.hospital.management.dto.PatientDTO;
-import com.hospital.management.entity.Patient;
-import com.hospital.management.service.PatientService;
-import jakarta.validation.Valid;
+import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.entity.Patient;
+import com.hmanagement.hospital.management.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class PatientController {
     private final PatientService patientService;
 
     @PostMapping("/register")
-    public ResponseEntity<Patient> registerPatient(@Valid @RequestBody PatientDTO patientDTO) {
+    public ResponseEntity<Patient> registerPatient(@RequestBody PatientDTO patientDTO) {
         return ResponseEntity.ok(patientService.registerPatient(patientDTO));
     }
 
@@ -34,7 +33,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDTO> updateByID(@PathVariable Long id, @Valid @RequestBody PatientDTO patientDetails) {
+    public ResponseEntity<PatientDTO> updateByID(@PathVariable Long id, @RequestBody PatientDTO patientDetails) {
         return ResponseEntity.ok(patientService.updatePatientById(id, patientDetails));
     }
 

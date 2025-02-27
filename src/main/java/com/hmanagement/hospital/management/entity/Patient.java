@@ -1,7 +1,7 @@
-package com.hospital.management.entity;
+package com.hmanagement.hospital.management.entity;
 
+import com.hmanagement.hospital.management.enums.Gender;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,11 +20,11 @@ public class Patient {
     private Long patientId;
 
     @Column(name = "Full_Name")
-    @NotBlank(message = "Full name is required")
+//    @NotBlank(message = "Full name is required")
     private String fullName;
 
     @Column(name = "Age")
-    @Min(value = 0, message = "Age cannot be negative")
+//    @Min(value = 0, message = "Age cannot be negative")
     private int age;
 
     @Enumerated(EnumType.STRING)
@@ -32,24 +32,24 @@ public class Patient {
     private Gender gender;
 
     @Column(name = "Contact_Number")
-    @NotBlank(message = "Contact number is required")
-    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid contact number")
+//    @NotBlank(message = "Contact number is required")
+//    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid contact number")
     private String contactNumber;
 
     @Column(name = "Email")
-    @Email(message = "Invalid email format")
+//    @Email(message = "Invalid email format")
     private String email;
 
     @Column(name = "Address", columnDefinition = "TEXT")
     private String address;
 
     @Column(name = "Emergency_Contact_Name")
-    @NotBlank(message = "Emergency contact name is required")
+//    @NotBlank(message = "Emergency contact name is required")
     private String emergencyContactName;
 
     @Column(name = "Emergency_Contact_Phone")
-    @NotBlank(message = "Emergency contact phone is required")
-    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid emergency contact phone")
+//    @NotBlank(message = "Emergency contact phone is required")
+//    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid emergency contact phone")
     private String emergencyContactPhone;
 
     @Column(name = "Created_At", nullable = false, updatable = false)
