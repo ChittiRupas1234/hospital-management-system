@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PatientDTO {
+public class PatientDto {
 
 //    @NotBlank(message = "Full name is required")
     private String fullName;

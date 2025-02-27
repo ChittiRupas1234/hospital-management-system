@@ -1,7 +1,7 @@
 package com.hmanagement.hospital.management.controller;
 
 
-import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.dto.PatientDto;
 import com.hmanagement.hospital.management.entity.Patient;
 import com.hmanagement.hospital.management.service.PatientService;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +18,29 @@ public class PatientController {
     private final PatientService patientService;
 
     @PostMapping("/register")
-    public ResponseEntity<Patient> registerPatient(@RequestBody PatientDTO patientDTO) {
-        return ResponseEntity.ok(patientService.registerPatient(patientDTO));
+    public ResponseEntity<Patient> registerPatient(@RequestBody PatientDto PatientDto) {
+        return ResponseEntity.ok(patientService.registerPatient(PatientDto));
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<PatientDTO>> getAllPatients() {
-        return ResponseEntity.ok(patientService.getAllPatients());
+    public ResponseEntity<List<PatientDto>> getAllPatients() {
+        List<PatientDto> patients = patientService.getAllPatients();
+
+        if (patients.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(patients);
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDTO> getPatientById(@PathVariable Long id) {
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id) {
         return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDTO> updateByID(@PathVariable Long id, @RequestBody PatientDTO patientDetails) {
+    public ResponseEntity<PatientDto> updateByID(@PathVariable Long id, @RequestBody PatientDto patientDetails) {
         return ResponseEntity.ok(patientService.updatePatientById(id, patientDetails));
     }
 
