@@ -34,4 +34,6 @@ public class PatientDto {
 //    @NotBlank(message = "Emergency contact phone is required")
 //    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid emergency contact phone")
     private String emergencyContactPhone;
+
+
 }
