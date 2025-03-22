@@ -3,7 +3,8 @@ package com.hmanagement.hospital.management.service.implementation;
 import com.hmanagement.hospital.management.constants.HMSConstants;
 import com.hmanagement.hospital.management.converter.DoctorConversions;
 import com.hmanagement.hospital.management.dto.DoctorDto;
-import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.dto.PatientDto;
+import com.hmanagement.hospital.management.dto.PatientDto;
 import com.hmanagement.hospital.management.entity.Appointment;
 import com.hmanagement.hospital.management.entity.Doctor;
 import com.hmanagement.hospital.management.entity.Patient;
@@ -72,10 +73,10 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
-    public ResponseEntity<List<PatientDTO>> getAppointments(UUID doctorId) {
+    public ResponseEntity<List<PatientDto>> getAppointments(UUID doctorId) {
         try {
             List<Appointment> todayAppointments = appointmentRepository.getAppointments(doctorId.toString());
-            List<PatientDTO> patientsList = helper.getPatientsList(todayAppointments, patientRepository);
+            List<PatientDto> patientsList = helper.getPatientsList(todayAppointments, patientRepository);
             return ResponseEntity.status(200).body(patientsList);
         } catch(Exception e) {
             return ResponseEntity.status(400).body(new ArrayList<>());
@@ -83,20 +84,20 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public ResponseEntity<List<PatientDTO>> getAppointments(UUID doctorId, LocalDate date) {
+    public ResponseEntity<List<PatientDto>> getAppointments(UUID doctorId, LocalDate date) {
         try {
             List<Appointment> todayAppointments = appointmentRepository.getAppointments(doctorId.toString(), date);
-            List<PatientDTO> patientsList = helper.getPatientsList(todayAppointments, patientRepository);
+            List<PatientDto> patientsList = helper.getPatientsList(todayAppointments, patientRepository);
             return ResponseEntity.ok(patientsList);
         } catch(Exception e) {
             return ResponseEntity.status(400).body(new ArrayList<>());
         }
     }
 
-    public ResponseEntity<List<PatientDTO>> getAllAppointments(UUID doctorId) {
+    public ResponseEntity<List<PatientDto>> getAllAppointments(UUID doctorId) {
         try {
             List<Appointment> allAppointments = appointmentRepository.getAllAppointments(doctorId.toString());
-            List<PatientDTO> patientList = helper.getPatientsList(allAppointments, patientRepository);
+            List<PatientDto> patientList = helper.getPatientsList(allAppointments, patientRepository);
             return ResponseEntity.ok(patientList);
         } catch(Exception e) {
             return ResponseEntity.status(400).body(new ArrayList<>());
@@ -105,14 +106,14 @@ public class DoctorServiceImpl implements DoctorService {
 }
 
 class DoctorServiceHelper {
-    List<PatientDTO> getPatientsList(List<Appointment> appointments, PatientRepository patientRepository) {
-        List<PatientDTO> patientsList = new ArrayList<>();
+    List<PatientDto> getPatientsList(List<Appointment> appointments, PatientRepository patientRepository) {
+        List<PatientDto> patientsList = new ArrayList<>();
         for(Appointment appointment : appointments) {
             if(appointment.getAppointmentStatus() == AppointmentStatus.CONFIRMED) {
                 Patient patient = patientRepository.findById(appointment.getPatientId()).orElseThrow(() -> new RuntimeException(HMSConstants.PatientNotFound));
-                PatientDTO patientDTO = new PatientDTO();
-                BeanUtils.copyProperties(patient, patientDTO);
-                patientsList.add(patientDTO);
+                PatientDto PatientDto = new PatientDto();
+                BeanUtils.copyProperties(patient, PatientDto);
+                patientsList.add(PatientDto);
             }
         }
         return patientsList;

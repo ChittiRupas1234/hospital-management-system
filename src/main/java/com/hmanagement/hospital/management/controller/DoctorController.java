@@ -1,7 +1,6 @@
 package com.hmanagement.hospital.management.controller;
 
-import com.hmanagement.hospital.management.dto.DoctorDto;
-import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.dto.DoctorDto;;
 import com.hmanagement.hospital.management.dto.PatientDto;
 import com.hmanagement.hospital.management.service.DoctorService;
 import com.hmanagement.hospital.management.service.implementation.DoctorServiceImpl;
