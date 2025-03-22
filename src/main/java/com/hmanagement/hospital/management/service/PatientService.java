@@ -58,7 +58,11 @@ public class PatientService {
 
     public PatientDto updatePatientById(Long id, PatientDto updatedPatientDto) {
         Patient oldPatientDetails = patientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + id));
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID: " + id));
+
+        if(oldPatientDetails.getIsDeleted()) { // account is deleted
+            throw new PatientNotFoundException("Account is Deleted, please contact reception office for more details");
+        }
 
         BeanUtils.copyProperties(updatedPatientDto, oldPatientDetails);
 
