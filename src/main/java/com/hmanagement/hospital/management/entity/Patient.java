@@ -63,7 +63,5 @@ public class Patient {
         createdAt = LocalDateTime.now();
     }
 
-    @Column(name = "is_deleted")
-    private Boolean isDeleted = Boolean.FALSE;
 
 }
