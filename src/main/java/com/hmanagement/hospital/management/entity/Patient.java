@@ -55,6 +55,9 @@ public class Patient {
     @Column(name = "Created_At", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = Boolean.FALSE;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

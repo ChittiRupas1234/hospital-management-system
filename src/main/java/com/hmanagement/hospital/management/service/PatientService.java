@@ -4,6 +4,7 @@ import com.hmanagement.hospital.management.dto.PatientDTO;
 import com.hmanagement.hospital.management.entity.Patient;
 import com.hmanagement.hospital.management.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public class PatientService {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + id));
 
+        // check is deleted or not
+
         return new PatientDTO(
                 patient.getFullName(),
                 patient.getAge(),
@@ -58,31 +61,40 @@ public class PatientService {
                 patient.getEmergencyContactPhone());
     }
 
-    public PatientDTO updatePatientById(Long id, PatientDTO patientDetails) {
-        Patient patient = patientRepository.findById(id)
+    public PatientDTO updatePatientById(Long id, PatientDTO updatedPatientDto) {
+        Patient oldPatientDetails = patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + id));
 
-        patient.setFullName(patientDetails.getFullName());
-        patient.setAge(patientDetails.getAge());
-        patient.setGender(patientDetails.getGender());
-        patient.setContactNumber(patientDetails.getContactNumber());
-        patient.setEmail(patientDetails.getEmail());
-        patient.setAddress(patientDetails.getAddress());
-        patient.setEmergencyContactName(patientDetails.getEmergencyContactName());
-        patient.setEmergencyContactPhone(patientDetails.getEmergencyContactPhone());
+        BeanUtils.copyProperties(updatedPatientDto, oldPatientDetails);
 
+        Patient updatedPatientDetails = patientRepository.save(oldPatientDetails);
 
-        Patient updatedPatient = patientRepository.save(patient);
+        PatientDTO updatedPatientDetailsDto = new PatientDTO();
+        BeanUtils.copyProperties(updatedPatientDto, updatedPatientDetailsDto);
 
-        return new PatientDTO(
-                updatedPatient.getFullName(),
-                updatedPatient.getAge(),
-                updatedPatient.getGender(),
-                updatedPatient.getContactNumber(),
-                updatedPatient.getEmail(),
-                updatedPatient.getAddress(),
-                updatedPatient.getEmergencyContactName(),
-                updatedPatient.getEmergencyContactPhone());
+        return updatedPatientDetailsDto;
+
+//        patient.setFullName(patientDetails.getFullName());
+//        patient.setAge(patientDetails.getAge());
+//        patient.setGender(patientDetails.getGender());
+//        patient.setContactNumber(patientDetails.getContactNumber());
+//        patient.setEmail(patientDetails.getEmail());
+//        patient.setAddress(patientDetails.getAddress());
+//        patient.setEmergencyContactName(patientDetails.getEmergencyContactName());
+//        patient.setEmergencyContactPhone(patientDetails.getEmergencyContactPhone());
+//
+//
+//        Patient updatedPatient = patientRepository.save(patient);
+//
+//        return new PatientDTO(
+//                updatedPatient.getFullName(),
+//                updatedPatient.getAge(),
+//                updatedPatient.getGender(),
+//                updatedPatient.getContactNumber(),
+//                updatedPatient.getEmail(),
+//                updatedPatient.getAddress(),
+//                updatedPatient.getEmergencyContactName(),
+//                updatedPatient.getEmergencyContactPhone());
     }
     public void deletePatientById(Long id) {
         if (!patientRepository.existsById(id)) {

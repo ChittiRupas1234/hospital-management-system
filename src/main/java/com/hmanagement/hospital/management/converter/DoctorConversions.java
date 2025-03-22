@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Component
 public class DoctorConversions {
-    private QualificationConverstions qualificationConverstions;
+    private final QualificationConverstions qualificationConverstions;
 
     @Autowired
     public DoctorConversions(QualificationConverstions qualificationConverstions) {
