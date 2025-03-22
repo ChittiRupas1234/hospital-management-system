@@ -2,6 +2,7 @@ package com.hmanagement.hospital.management.controller;
 
 import com.hmanagement.hospital.management.dto.DoctorDto;
 import com.hmanagement.hospital.management.dto.PatientDTO;
+import com.hmanagement.hospital.management.dto.PatientDto;
 import com.hmanagement.hospital.management.service.DoctorService;
 import com.hmanagement.hospital.management.service.implementation.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,17 @@ public class DoctorController {
     }
 
     @GetMapping("/get-appointment/{id}")
-    public ResponseEntity<List<PatientDTO>> getAppointments(@PathVariable("id") UUID id) {
+    public ResponseEntity<List<PatientDto>> getAppointments(@PathVariable("id") UUID id) {
         return doctorService.getAppointments(id);
     }
 
     @GetMapping("/get-appointment-on/{id}")
-    public ResponseEntity<List<PatientDTO>> getAppointments(@PathVariable("id") UUID id, @RequestParam("date") LocalDate date) {
+    public ResponseEntity<List<PatientDto>> getAppointments(@PathVariable("id") UUID id, @RequestParam("date") LocalDate date) {
         return doctorService.getAppointments(id, date);
     }
 
     @GetMapping("/get-all-appointments/{id}")
-    public ResponseEntity<List<PatientDTO>> getAllAppointments(@PathVariable("id") UUID id) {
+    public ResponseEntity<List<PatientDto>> getAllAppointments(@PathVariable("id") UUID id) {
         return doctorService.getAllAppointments(id);
     }
 }
