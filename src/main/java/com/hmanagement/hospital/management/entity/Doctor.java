@@ -29,6 +29,15 @@ public class Doctor {
     private String emailId;
     private Date dateOfBirth;
     private String adhaarNo;
+    private Boolean isDeleted = Boolean.FALSE;
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getisDeleted() {
+        return this.isDeleted;
+    }
 
     public Doctor() {
     }
