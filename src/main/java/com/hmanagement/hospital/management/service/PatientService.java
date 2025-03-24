@@ -23,6 +23,7 @@ public class PatientService {
 
         Patient patient=new Patient();
         BeanUtils.copyProperties(PatientDto, patient);
+
         return patientRepository.save(patient);
     }
 
